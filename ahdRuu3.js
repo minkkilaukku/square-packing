@@ -196,7 +196,7 @@ class A {
             let c = this.randomLetter();
             prev = this.lines[x][y];
             this.setCell(x, y, c);
-            if (this.covered>bestCoverage) {
+            if (this.covered>=bestCoverage) {
                 sol = this.toString();
                 bestCoverage = this.covered;
                 //console.log("Found new best, of coverage "+bestCoverage);
