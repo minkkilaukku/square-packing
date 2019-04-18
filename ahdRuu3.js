@@ -190,6 +190,8 @@ class A {
         let sol = null;
         let bestCoverage = -1;
         let prev;
+        
+        let limitForCheck = 10*this.m*this.n; //or what ever the expected value should be??
         for (let i=0; i<k; i++) {
             let x = randInt(0, this.m-1);
             let y = randInt(0, this.n-1);
@@ -197,6 +199,7 @@ class A {
             prev = this.lines[x][y];
             this.setCell(x, y, c);
             if (this.covered>=bestCoverage) {
+                if (this.covered>bestCoverage) i = 0; //start the count anew when find better
                 sol = this.toString();
                 bestCoverage = this.covered;
                 //console.log("Found new best, of coverage "+bestCoverage);
@@ -207,6 +210,11 @@ class A {
             } else {
                 this.setCell(x, y, prev);
             }
+            
+            if (i===limitForCheck) {
+                //TODO: check for each cell each digit. If can't improve, stop
+            }
+            
         }
         return {coverage: bestCoverage, sol: sol};
     }
